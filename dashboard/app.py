@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+# import seaborn as sns
+import plotly.express as px
+# import matplotlib.pyplot as plt
 import pickle
 
 # ---------------- LOAD DATA ----------------
@@ -60,6 +61,9 @@ col4.metric(
 # ---------------- ENGAGEMENT ----------------
 st.subheader("📊 Engagement Analysis")
 
+fig = px.histogram(filtered, x="JobSatisfaction")
+st.plotly_chart(fig)
+
 fig1, ax1 = plt.subplots()
 sns.histplot(filtered["JobSatisfaction"], bins=10, ax=ax1)
 ax1.set_title("Job Satisfaction Distribution")
@@ -96,6 +100,9 @@ sns.boxplot(
 ax4.set_title("Salary vs Attrition")
 st.pyplot(fig4)
 
+
+fig = px.box(filtered, x="Attrition", y="MonthlyIncome")
+st.plotly_chart(fig)
 # ---------------- ALERT SECTION ----------------
 st.subheader("🚨 HR Alerts")
 
