@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-# import seaborn as sns
+import seaborn as sns
 import plotly.express as px
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import pickle
 
 # ---------------- LOAD DATA ----------------
@@ -64,16 +64,19 @@ st.subheader("📊 Engagement Analysis")
 fig = px.histogram(filtered, x="JobSatisfaction")
 st.plotly_chart(fig)
 
-fig1, ax1 = plt.subplots()
-sns.histplot(filtered["JobSatisfaction"], bins=10, ax=ax1)
+fig1 = px.histogram(filtered, x="JobSatisfaction", nbins=10)
+st.plotly_chart(fig1)
+# fig1, ax1 = plt.subplots()
+# sns.histplot(filtered["JobSatisfaction"], bins=10, ax=ax1)
 ax1.set_title("Job Satisfaction Distribution")
 st.pyplot(fig1)
 
 # ---------------- BURNOUT ----------------
 st.subheader("🔥 Burnout Indicators")
-
-fig2, ax2 = plt.subplots()
-sns.countplot(x="OverTime", data=filtered, ax=ax2)
+fig2 = px.box(filtered, x="Attrition", y="MonthlyIncome")
+st.plotly_chart(fig2)
+# fig2, ax2 = plt.subplots()
+# sns.countplot(x="OverTime", data=filtered, ax=ax2)
 ax2.set_title("Overtime Distribution")
 st.pyplot(fig2)
 
